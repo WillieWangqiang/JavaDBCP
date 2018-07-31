@@ -67,33 +67,4 @@ public class DBCPTest {
 }
 
 
-//新建一个类用于测试上述方法类
 
-package dbcpJdbcTest;
-
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-
-public class dbcpJdbcTest {
-	public static void main(String[] args) {
-		Connection conn = DBCPTest.getConnection();
-		try {
-			Statement st = conn.createStatement();
-			String sql_sel = "select * from user_name";
-			ResultSet rs = st.executeQuery(sql_sel);
-			while(rs.next()) {
-				int id = rs.getInt("user_id");
-				String name = rs.getString("user_name");
-				String password = rs.getString("user_password");
-				System.out.println("第"+id+"项用户名为："+name+"密码是"+password);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}finally {
-			DBCPTest.close(conn);
-		}
-	}
-}
-//第*项用户名为：****密码是****  有数据显示测试成功！
