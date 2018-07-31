@@ -55,12 +55,13 @@ public class DBCPTest {
 			throw new RuntimeException(e);
 		}
 	}
-	public static void close() {      //归还连接到连接池方法
-		Connection conn = DBCPTest.getConnection();
-		try {
-			conn.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
+	public static void close(Connection conn) {      //归还连接到连接池方法
+		if(conn != null){
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 }
@@ -91,7 +92,7 @@ public class dbcpJdbcTest {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
-			DBCPTest.close();
+			DBCPTest.close(conn);
 		}
 	}
 }
